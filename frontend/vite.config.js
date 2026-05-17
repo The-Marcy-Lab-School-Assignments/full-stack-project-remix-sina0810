@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const SERVER_PORT = 8080;
+const SERVER_PORT = 3000;
 
 // The proxy makes browser requests to /api (from localhost:5173) appear as
 // same-origin requests to the Express server on localhost:8080. The browser
