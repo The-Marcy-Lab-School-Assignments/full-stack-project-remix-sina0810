@@ -22,11 +22,11 @@ function AddApplicationForm({ loadApplications }) {
 
   return (
     <form id="add-application-form" onSubmit={handleSubmit}>
-      <label htmlFor="company_name-input">New Application:</label>
-      <input type="text" name="company_name" id="company_name-input" placeholder="Compnay name" />
+      <label htmlFor="company_name-input">Company Name <span style={{color: 'red'}}>*</span></label>
+      <input type="text" name="company_name" id="company_name-input" placeholder="Compnay name" required/>
 
-      <label htmlFor="job_title">Job Title</label>
-      <input type="text" name="job_title" id="job_title-input" placeholder="Job title" />
+      <label htmlFor="job_title">Job Title <span style={{color: 'red'}}>*</span></label>
+      <input type="text" name="job_title" id="job_title-input" placeholder="Job title" required/>
 
       <label htmlFor="description">Description</label>
       <input type="text" name="description" id="description-input" placeholder="Description " />
@@ -42,8 +42,8 @@ function AddApplicationForm({ loadApplications }) {
       <label htmlFor="salary">Salary</label>
       <input type="number" name="salary" id="salary-input" placeholder="Salary"/>
 
-      <label htmlFor="date_applied">Date Applied</label>
-      <input type="date" name="date_applied" id="date_applied-input" placeholder="Date Applied required" />
+      <label htmlFor="date_applied">Date Applied <span style={{color: 'red'}}>*</span></label>
+      <input type="date" name="date_applied" id="date_applied-input" placeholder="Date Applied required" required/>
 
       <button type="submit">Add</button>
     </form>

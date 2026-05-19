@@ -19,7 +19,8 @@ function ApplicationItem({ application, loadApplications }) {
       <span>{application.job_title}</span>
       <span>{application.description}</span>
       <span>{application.work_type}</span>
-      <span>{application.status}</span>
+      <label style={{fontSize: '0.75rem', color: 'var(--text-secondary)'}}>Status</label>
+
       <select 
         value={application.status}
         onChange={handleChange}
