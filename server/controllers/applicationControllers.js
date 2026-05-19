@@ -12,8 +12,9 @@ module.exports.listApplication = async (req, res, next) => {
 module.exports.createApplication = async (req, res, next) => {
   try {
     const { company_name, job_title, description, work_type, salary, date_applied } = req.body;
+    const parsedSalary = salary ? parseInt(salary) : null;
     if (!company_name || !job_title || !date_applied) return res.status(400).send({ error: 'company name, job title, date applied is required.' });
-    const application = await applicationModel.create(company_name, job_title, description, work_type, salary, date_applied, req.session.user_id);
+    const application = await applicationModel.create(company_name, job_title, description, work_type, parsedSalary, date_applied, req.session.user_id);
     res.status(201).send(application);
   } catch (err) {
     next(err);
