@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchAllApplications } from '../adapters/application-adapters';
+import { fetchAllApplications, createApplication } from '../adapters/application-adapters';
 import AddApplicationForm from './AddApplicationForm';
 import ApplicationList from './ApplicationList';
 
@@ -28,13 +28,26 @@ function ApplicationPage({ currentUser, handleLogout }) {
     loadApplications();
   }, []);
 
+  // Passed to AddApplicationForm as onAdd.
+  // Saves the job, reloads the list, and returns true so the form clears.
+  const handleAddApplication = async (application) => {
+    const { company_name, job_title, description, work_type, salary, date_applied } = application;
+    const { error } = await createApplication(company_name, job_title, description, work_type, salary, date_applied);
+    if (error) {
+      console.error(error);
+      return false;
+    }
+    await loadApplications();
+    return true;
+  };
+
   return (
     <section>
       <div id="user-controls">
         <span>Welcome, <strong>{currentUser.username}</strong>!</span>
         <button onClick={handleLogout}>Log Out</button>
       </div>
-      <AddApplicationForm loadApplications={loadApplications} />
+      <AddApplicationForm onAdd={handleAddApplication} />
       {isLoading && <p>Loading applications...</p>}
       {error && <p className="error">Something went wrong: {error}</p>}
       <ApplicationList applications={applications} loadApplications={loadApplications} />
